@@ -1,7 +1,6 @@
 package com.warchaser.daggertest.module;
 
-import com.warchaser.daggertest.activities.MainActivity;
-import com.warchaser.daggertest.app.AppApplication;
+import com.warchaser.daggertest.activities.main.MainActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

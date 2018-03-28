@@ -1,6 +1,7 @@
-package com.warchaser.daggertest.activities;
+package com.warchaser.daggertest.activities.main;
 
 import android.os.Bundle;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import com.warchaser.daggertest.R;
@@ -9,6 +10,7 @@ import com.warchaser.daggertest.bean.Login;
 import com.warchaser.daggertest.bean.Movie;
 import com.warchaser.daggertest.bean.MoviesWrapper;
 import com.warchaser.daggertest.net.TmdbWebService;
+import com.warchaser.daggertest.utils.RxUtils;
 
 import java.util.List;
 
@@ -29,8 +31,11 @@ public class MainActivity extends BaseActivity {
     @Inject
     Login mXiaoMing;
 
-    @BindView(R.id.tv)
-    TextView mTv;
+//    @BindView(R.id.tv)
+//    TextView mTv;
+
+    @BindView(R.id.grid_view)
+    GridView mGridView;
 
     @Inject
     TmdbWebService mService;
@@ -39,14 +44,19 @@ public class MainActivity extends BaseActivity {
 
     private Disposable mFetchSubscription;
 
+    private MainAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mUnBinder = ButterKnife.bind(this);
 
-        String name = mXiaoMing.getName();
-        mTv.setText(name);
+        mAdapter = new MainAdapter(this);
+        mGridView.setAdapter(mAdapter);
+
+//        String name = mXiaoMing.getName();
+//        mTv.setText(name);
 
         Observable<List<Movie>> observable = mService.popularMovies().map(new Function<MoviesWrapper, List<Movie>>() {
             @Override
@@ -59,7 +69,7 @@ public class MainActivity extends BaseActivity {
                 new Consumer<List<Movie>>() {
             @Override
             public void accept(List<Movie> movies) throws Exception {
-                List<Movie> list = movies;
+                mAdapter.notifyDataSetAllChanged(movies);
             }
         }, new Consumer<Throwable>() {
             @Override
@@ -78,5 +88,7 @@ public class MainActivity extends BaseActivity {
         }
 
         mUnBinder = null;
+
+        RxUtils.unsubscribe(mFetchSubscription);
     }
 }
