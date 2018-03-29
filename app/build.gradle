@@ -80,4 +80,8 @@ dependencies {
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.2.0'
+
+    //logger
+    //这个依赖库无法打印真机的log,尤其是国产手机
+    implementation 'com.orhanobut:logger:2.1.1'
 }

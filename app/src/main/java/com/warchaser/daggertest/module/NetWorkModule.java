@@ -1,7 +1,12 @@
 package com.warchaser.daggertest.module;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+
 import com.warchaser.daggertest.net.RequestInterceptor;
 import com.warchaser.daggertest.net.TmdbWebService;
+import com.warchaser.daggertest.utils.Constant;
+import com.warchaser.daggertest.utils.NLog;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,7 +37,17 @@ public class NetWorkModule {
     @Provides
     public OkHttpClient provideOkHttpClient(RequestInterceptor interceptor){
 
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(@NonNull String message) {
+                if(message.startsWith("{")){
+                    NLog.printJson(Constant.COMMON_TAG, message, "result:");
+                } else {
+                    Log.e(Constant.COMMON_TAG, message);
+                }
+            }
+        });
+
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         return new OkHttpClient.Builder()
@@ -55,6 +70,9 @@ public class NetWorkModule {
                 .build();
     }
 
+    /**
+     * 实现请求单例，因为是在application中调用，所以是全局单例
+     * */
     @Singleton
     @Provides
     TmdbWebService tmdbWebService(Retrofit retrofit){

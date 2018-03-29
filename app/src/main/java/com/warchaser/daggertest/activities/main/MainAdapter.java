@@ -37,6 +37,7 @@ public class MainAdapter extends BaseAdapter{
     private Context mContext;
     private List<Movie> mDataList = new ArrayList<>();
 
+    private LayoutInflater mInflater;
     private RequestOptions mOptions;
 
     public MainAdapter(Context context){
@@ -46,6 +47,8 @@ public class MainAdapter extends BaseAdapter{
                 .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .priority(Priority.HIGH);
+
+        mInflater = LayoutInflater.from(mContext);
     }
 
     public void notifyDataSetAllChanged(List<Movie> dataList){
@@ -77,7 +80,7 @@ public class MainAdapter extends BaseAdapter{
         final ViewHolder viewHolder;
         Movie movie = mDataList.get(position);
         if(convertView == null){
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_main_activity_gridview, parent, false);
+            convertView = mInflater.inflate(R.layout.item_main_activity_gridview, parent, false);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {

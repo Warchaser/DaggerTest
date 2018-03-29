@@ -2,7 +2,6 @@ package com.warchaser.daggertest.activities.main;
 
 import android.os.Bundle;
 import android.widget.GridView;
-import android.widget.TextView;
 
 import com.warchaser.daggertest.R;
 import com.warchaser.daggertest.app.BaseActivity;
@@ -50,6 +49,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mUnBinder = ButterKnife.bind(this);
 
         mAdapter = new MainAdapter(this);
@@ -65,7 +65,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        mFetchSubscription =  observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+        mFetchSubscription = observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
                 new Consumer<List<Movie>>() {
             @Override
             public void accept(List<Movie> movies) throws Exception {
