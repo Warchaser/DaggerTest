@@ -32,18 +32,11 @@ import butterknife.ButterKnife
 class MainAdapter(private val mContext: Context) : BaseAdapter() {
     private val mDataList = ArrayList<Movie>()
 
-    private val mInflater: LayoutInflater
-    private val mOptions: RequestOptions
-
-    init {
-
-        mOptions = RequestOptions()
-                .centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                .priority(Priority.HIGH)
-
-        mInflater = LayoutInflater.from(mContext)
-    }
+    private val mInflater: LayoutInflater = LayoutInflater.from(mContext)
+    private val mOptions: RequestOptions = RequestOptions()
+            .centerCrop()
+            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+            .priority(Priority.HIGH)
 
     fun notifyDataSetAllChanged(dataList: List<Movie>) {
         if (mDataList != null) {
@@ -78,13 +71,13 @@ class MainAdapter(private val mContext: Context) : BaseAdapter() {
             viewHolder = convertView.tag as ViewHolder
         }
 
-        viewHolder.mTvTitle!!.text = movie.title
+        viewHolder.mTvTitle.text = movie.title
 
         Glide.with(mContext)
                 .asBitmap()
                 .load(ImageUtils.getPosterUri(movie.posterPath))
                 .apply(mOptions)
-                .into(object : BitmapImageViewTarget(viewHolder.mIvPic!!) {
+                .into(object : BitmapImageViewTarget(viewHolder.mIvPic) {
 
                     override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                         super.onResourceReady(resource, transition)
@@ -97,7 +90,7 @@ class MainAdapter(private val mContext: Context) : BaseAdapter() {
 
     private fun setTitleBackgroundColor(palette: Palette, viewHolder: ViewHolder) {
         //        Palette.Swatch swatch = palette.getVibrantSwatch();
-        viewHolder.mTvTitleBackground!!.setBackgroundColor(palette.getVibrantColor(mContext.resources.getColor(R.color.black_translucent_60)))
+        viewHolder.mTvTitleBackground.setBackgroundColor(palette.getVibrantColor(mContext.resources.getColor(R.color.black_translucent_60)))
         //        if(swatch != null){
         //            viewHolder.mTvTitle.setTextColor(swatch.getTitleTextColor());
         //        }
