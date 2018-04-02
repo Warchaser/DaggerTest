@@ -1,5 +1,11 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
 def getProperty(String filename, String propName) {
     def propsFile = rootProject.file(filename)
     if (propsFile.exists()) {
@@ -35,6 +41,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    kapt {
+        generateStubs = true//将第三方库先生成class在用kotlin注解(glide)
+    }
 }
 
 ext {
@@ -52,17 +62,20 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
+    //kotlin
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
     // ButterKnife
     implementation 'net.jcip:jcip-annotations:1.0'
     implementation 'com.squareup.moshi:moshi:1.1.0'
     implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    kapt 'com.jakewharton:butterknife-compiler:8.8.1'
 
     // Dagger2
     implementation 'com.google.dagger:dagger:2.14.1'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
+    kapt 'com.google.dagger:dagger-compiler:2.14.1'
     implementation 'com.google.dagger:dagger-android-support:2.14.1'
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.14.1'
+    kapt 'com.google.dagger:dagger-android-processor:2.14.1'
 
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp:${okhttpVersion}"
@@ -80,6 +93,10 @@ dependencies {
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.2.0'
+
+    implementation "com.github.bumptech.glide:okhttp3-integration:1.4.0@aar"
+    kapt 'com.github.bumptech.glide:compiler:4.2.0'
+    annotationProcessor 'com.github.bumptech.glide:glide:4.2.0'
 
     //logger
     //这个依赖库无法打印真机的log,尤其是国产手机

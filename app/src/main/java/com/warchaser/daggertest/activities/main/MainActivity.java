@@ -24,6 +24,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import kotlin.jvm.JvmField;
 
 public class MainActivity extends BaseActivity {
 
@@ -33,6 +34,7 @@ public class MainActivity extends BaseActivity {
 //    @BindView(R.id.tv)
 //    TextView mTv;
 
+    @JvmField
     @BindView(R.id.grid_view)
     GridView mGridView;
 

@@ -24,6 +24,11 @@
 
         <activity android:name=".app.BaseActivity"/>
 
+        <!--glide4.x以上，在kotlin下必须实现-->
+        <meta-data
+            android:name="com.warchaser.daggertest.utils.CustomAppGlideModule"
+            android:value="GlideModule" />
+
     </application>
 
 </manifest>
