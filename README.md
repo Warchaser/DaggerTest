@@ -7,6 +7,6 @@ Glide4,这个版本目前与Kotlin不兼容，需要引入GlideApp的概念，�
 
 十分不建议Java与Kotlin混用
 
-    必须混用的情况下，建议Kotlin作为界面罗技，Java为工具类语言
+    必须混用的情况下，建议Kotlin作为界面逻辑，Java为工具类语言
     
-现阶段，Kotlin还是十分不成熟，只限定与“尝鲜”
+现阶段，Kotlin还是十分不成熟，只限定于“尝鲜”
