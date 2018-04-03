@@ -101,17 +101,17 @@ class MainAdapter(private val mContext: Context) : BaseAdapter() {
         /**
          * 电影封面
          */
-        @BindView(R.id.iv_pic) lateinit var mIvPic: ImageView
+        @BindView(R.id.iv_pic) lateinit var mIvPic : ImageView
 
         /**
          * 电影标题
          */
-        @BindView(R.id.tv_title) lateinit var mTvTitle: TextView
+        @BindView(R.id.tv_title) lateinit var mTvTitle : TextView
 
         /**
          * 电影标题背景
          */
-        @BindView(R.id.tv_title_background) lateinit var mTvTitleBackground: View
+        @BindView(R.id.tv_title_background) lateinit var mTvTitleBackground : View
 
         init {
             ButterKnife.bind(this, v)

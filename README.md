@@ -5,8 +5,11 @@ java工程中加入Kotlin文件，会导致原有的java中使用的标签语法
 
 Glide4,这个版本目前与Kotlin不兼容，需要引入GlideApp的概念，并在AndroidManifest中静态声明
 
-十分不建议Java与Kotlin混用
-
-    必须混用的情况下，建议Kotlin作为界面逻辑，Java为工具类语言
+    十分不建议Java与Kotlin混用
+    必须混用的情况下，建议Kotlin作为界面逻辑，Java为工具类语言
+    现阶段，Kotlin还是十分不成熟，只限定于“尝鲜”
     
-现阶段，Kotlin还是十分不成熟，只限定于“尝鲜”
+一些Kotlin语法点
+    
+    vararg 变长参数
+    @JvmStatic Java调用Kotlin的静态类方法时，需要加入此注解    

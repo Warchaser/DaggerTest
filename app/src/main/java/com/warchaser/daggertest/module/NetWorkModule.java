@@ -1,7 +1,6 @@
 package com.warchaser.daggertest.module;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.warchaser.daggertest.net.RequestInterceptor;
 import com.warchaser.daggertest.net.TmdbWebService;
@@ -43,7 +42,7 @@ public class NetWorkModule {
                 if(message.startsWith("{")){
                     NLog.printJson(Constant.COMMON_TAG, message, "result:");
                 } else {
-                    Log.e(Constant.COMMON_TAG, message);
+                    NLog.e(Constant.COMMON_TAG, message);
                 }
             }
         });
