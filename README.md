@@ -11,5 +11,7 @@ Glide4,这个版本目前与Kotlin不兼容，需要引入GlideApp的概念，�
     
 一些Kotlin语法点
     
-    vararg 变长参数
-    @JvmStatic Java调用Kotlin的静态类方法时，需要加入此注解    
+    1.vararg 变长参数
+    2.@JvmStatic Java调用Kotlin的静态类方法时，需要加入此注解;
+    或者可以将全部代码加入到companion object代码块中，调用时，需要调用Companion对象再调用相应方法
+    如：NLog.Companion.printLine()    

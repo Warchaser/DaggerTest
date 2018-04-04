@@ -50,7 +50,7 @@ object NLog {
             } else {
                 message = msg
             }
-        } catch (e : Exception ){
+        } catch (e : Exception){
             message = msg
             e.printStackTrace()
         } catch (e : Error){
