@@ -3,6 +3,7 @@ package com.warchaser.daggertest.module;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.warchaser.daggertest.moshi.CustomConverterFactory;
 import com.warchaser.daggertest.net.RequestInterceptor;
 import com.warchaser.daggertest.net.TmdbWebService;
 import com.warchaser.daggertest.utils.Constant;
@@ -65,6 +66,7 @@ public class NetWorkModule {
                 .baseUrl(BASE_URL)
 //                .addConverterFactory(GsonConverterFactory.create())
                 .addConverterFactory(MoshiConverterFactory.create())
+//                .addConverterFactory(CustomConverterFactory.create().asLenient())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build();
